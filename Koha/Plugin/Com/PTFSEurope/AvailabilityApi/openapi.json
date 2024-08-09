@@ -1,0 +1,68 @@
+{
+    "/ill_availability_search_api": {
+        "get": {
+            "x-mojo-to": "Com::PTFSEurope::AvailabilityApi::Api#search",
+            "operationId": "ApiSearchApi",
+            "tags": ["ill","availability"],
+            "parameters": [
+                {
+                    "name": "metadata",
+                    "in": "query",
+                    "description": "The metadata to use for searching",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "start",
+                    "in": "query",
+                    "description": "Pagination: the record to start",
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "name": "length",
+                    "in": "query",
+                    "description": "Pagination: the number of records to return",
+                    "required": false,
+                    "type": "string"
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "description": "An array of search results, maybe an error"
+                }
+            }
+        }
+    },
+    "/ill_availability_api_fulltext": {
+        "get": {
+            "x-mojo-to": "Com::PTFSEurope::AvailabilityApi::Api#fulltext",
+            "operationId": "ApiFulltextApi",
+            "tags": ["ill","availability"],
+            "parameters": [
+                {
+                    "name": "an",
+                    "in": "query",
+                    "description": "Koha API Accession Number",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "dbid",
+                    "in": "query",
+                    "description": "Database ID",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Will forward the user agent to a full text document"
+                }
+            }
+        }
+    }
+}
