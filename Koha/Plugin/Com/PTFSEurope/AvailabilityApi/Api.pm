@@ -47,34 +47,6 @@ sub search {
     # ILL request metadata coming from 'create' form
     $metadata = decode_json( decode_base64( uri_unescape($metadata) ) );
 
-    # EBSCO to Koha ILL fieldmap, ordered by most relevant koha field match
-    my %fieldmap = (
-        TI => [ 'article_title',  'chapter',        'title' ],
-        AU => [ 'article_author', 'chapter_author', 'author' ],
-        IB => ['isbn'],
-        IS => ['issn'],
-        TX => ['doi']
-    );
-
-    my %params = ();
-    foreach my $ebsco_code ( keys %fieldmap ) {
-        foreach my $koha_field ( @{ $fieldmap{$ebsco_code} } ) {
-
-            # Check if this koha field exists in the submitted in metadata
-            if ( $metadata->{$koha_field} && length $metadata->{$koha_field} > 0 ) {
-                $params{$ebsco_code} = $metadata->{$koha_field};
-
-                # Most relevant koha field for this ebsco code was found. Bail
-                last;
-            }
-        }
-    }
-
-    # Bail out if we have nothing to search with
-    if ( !keys %params ) {
-        return_error( $c, 400, 'No searchable metadata found' );
-    }
-
     my $search_params;
     if ( $metadata->{issn} ) {
         push( @{ $search_params->{'-or'} }, [ { 'issn' => $metadata->{issn} } ] );
