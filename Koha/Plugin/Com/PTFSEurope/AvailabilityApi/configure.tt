@@ -47,6 +47,12 @@
                     value="[% config.ill_avail_api_name || " ILL availability - API" %]">
                 <p>The text that is displayed in the user interface above search results from Koha API</p>
             </div>
+            <div id="ill_avail_api_host" class="ill_avail_config_field">
+                <label for="ill_avail_host_input">Koha API user ID: </label><input id="ill_avail_host_input"
+                    placeholder="https://api.koha-community.org/" type="text" name="ill_avail_api_host"
+                    value="[% config.ill_avail_api_host %]">
+                <p>OPAC URL for the Koha API. Include the trailing slash.</p>
+            </div>
             <div id="ill_avail_api_userid" class="ill_avail_config_field">
                 <label for="ill_avail_userid_input">Koha API user ID: </label><input id="ill_avail_userid_input"
                     placeholder="joe_bloggs" type="text" name="ill_avail_api_userid"

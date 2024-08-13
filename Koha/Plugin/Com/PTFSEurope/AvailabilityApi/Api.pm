@@ -28,9 +28,9 @@ use HTTP::Request::Common;
 use Mojo::Base 'Mojolicious::Controller';
 use Koha::Plugin::Com::PTFSEurope::AvailabilityApi;
 
-my $base_url      = "redacted";       #TODO: Put this in a config value
 my $ua            = LWP::UserAgent->new;
 my $plugin_config = get_plugin_config();
+my $base_url      = $plugin_config->{ill_avail_api_host};
 my $user          = $plugin_config->{ill_avail_api_userid};
 my $pass          = $plugin_config->{ill_avail_api_password};
 my $encoded_login = encode_base64( $user . ':' . $pass, '' );
@@ -149,7 +149,7 @@ sub prep_response {
         );
 
         my $item_url = sprintf(
-            '%s/api/v1/biblios/%s/items',
+            '%sapi/v1/biblios/%s/items',
             $base_url,
             $record->{biblio_id},
         );
@@ -159,7 +159,7 @@ sub prep_response {
         # Calculate which page of result we're requesting
         my $items = $ua->request(
             GET sprintf(
-                '%s/api/v1/biblios/%s/items',
+                '%sapi/v1/biblios/%s/items',
                 $base_url,
                 $record->{biblio_id},
             ),
@@ -210,7 +210,7 @@ sub get_libraries {
     );
 
     my $libraries_url = sprintf(
-        '%s/api/v1/libraries?_per_page=-1',
+        '%sapi/v1/libraries?_per_page=-1',
         $base_url
     );
 
