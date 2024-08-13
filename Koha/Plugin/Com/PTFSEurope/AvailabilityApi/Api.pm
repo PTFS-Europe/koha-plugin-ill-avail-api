@@ -76,8 +76,6 @@ sub search {
     }
 
     my $search_params;
-    $search_params = { '-or' => () };
-
     if ( $metadata->{issn} ) {
         push( @{ $search_params->{'-or'} }, [ { 'issn' => $metadata->{issn} } ] );
     }
