@@ -30,8 +30,9 @@ use Koha::Plugin::Com::PTFSEurope::AvailabilityApi;
 
 my $base_url      = "redacted";       #TODO: Put this in a config value
 my $ua            = LWP::UserAgent->new;
-my $user          = 'redacted';                                #TODO: Get this from config
-my $pass          = 'redacted';                         #TODO: Get this from config
+my $plugin_config = get_plugin_config();
+my $user          = $plugin_config->{ill_avail_api_userid};
+my $pass          = $plugin_config->{ill_avail_api_password};
 my $encoded_login = encode_base64( $user . ':' . $pass, '' );
 
 sub search {
