@@ -151,7 +151,9 @@ sub prep_response {
             $item->{home_library_id} =~ s/^\s+|\s+$//g;
             my ($filtered_library) = grep { $_->{library_id} eq $item->{home_library_id}; } @{$libraries};
 
-            $item_holdings .= $filtered_library->{name} . '<br>';
+            $item_holdings .= '<strong>' . $filtered_library->{name} . '</strong>';
+            $item_holdings .= $item->{public_notes} ? ' (' . $item->{public_notes} . ')' : '';
+            $item_holdings .= '<br>';
 
         }
 
