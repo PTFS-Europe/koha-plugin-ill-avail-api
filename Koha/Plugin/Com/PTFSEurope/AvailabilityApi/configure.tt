@@ -61,7 +61,7 @@
             </div>
             <div id="ill_avail_api_password" class="ill_avail_config_field">
                 <label for="ill_avail_password_input">Koha API user password: </label><input
-                    id="ill_avail_password_input" placeholder="my_secret_password" type="text"
+                    id="ill_avail_password_input" placeholder="my_secret_password" type="password"
                     name="ill_avail_api_password" value="[% config.ill_avail_api_password %]">
                 <p>If your Koha API access is using BasicRestAuth authentication, specify the password here.</p>
             </div>
