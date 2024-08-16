@@ -15,13 +15,13 @@ use Digest::MD5 qw( md5_hex );
 use MIME::Base64 qw( decode_base64 );
 use URI::Escape qw ( uri_unescape );
 
-our $VERSION = "1.0.0";
+our $VERSION = "1.1.0";
 
 our $metadata = {
     name            => 'ILL availability - API',
     author          => 'PTFS Europe',
     date_authored   => '2024-08-14',
-    date_updated    => "2024-08-14",
+    date_updated    => "2024-08-16",
     minimum_version => '23.11.00.000',
     maximum_version => undef,
     version         => $VERSION,
