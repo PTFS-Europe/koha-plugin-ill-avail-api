@@ -131,7 +131,7 @@ sub prep_response {
         # Calculate which page of result we're requesting
         my $items = $ua->request(
             GET sprintf(
-                '%sapi/v1/biblios/%s/items',
+                '%sapi/v1/biblios/%s/items?_per_page=-1',
                 $base_url,
                 $record->{biblio_id},
             ),
