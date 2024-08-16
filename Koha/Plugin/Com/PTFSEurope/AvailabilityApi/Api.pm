@@ -146,15 +146,20 @@ sub prep_response {
         my $url = $base_url . 'cgi-bin/koha/opac-detail.pl?biblionumber=' . $record->{biblio_id};
 
         my $item_holdings = "Found in:<br>";
+        my @items_array;
         foreach my $item ( @{$items_response} ) {
 
             $item->{home_library_id} =~ s/^\s+|\s+$//g;
             my ($filtered_library) = grep { $_->{library_id} eq $item->{home_library_id}; } @{$libraries};
 
-            $item_holdings .= '<strong>' . $filtered_library->{name} . '</strong>';
-            $item_holdings .= $item->{public_notes} ? ' (' . $item->{public_notes} . ')' : '';
-            $item_holdings .= '<br>';
+            push @items_array, { $filtered_library->{name} => $item->{public_notes} };
+        }
 
+        @items_array = sort { ( keys %$a )[0] cmp( keys %$b )[0] } @items_array;
+        foreach my $item ( @items_array ) {
+            $item_holdings .= '<strong>' . ( keys %$item )[0] . '</strong>';
+            $item_holdings .= ( values %$item )[0] ? ' (' . ( values %$item )[0] . ')' : '';
+            $item_holdings .= '<br>';
         }
 
         my $title  = $item_holdings;
